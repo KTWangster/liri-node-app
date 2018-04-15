@@ -4,13 +4,29 @@ var fs = require("fs");
 var path = "random.txt";
 // Stores all arguments in an array.
 var nodeArgs = process.argv;
-var userInput = process.argv[2];
 var spotify = require("node-spotify-app");
 var twitter = require("twitter");
+var userCommand = process.argv[2];
+var userInput = process.argv[3];
 // Empty variable for holding searches.
 var search = "";
 
 // Defines Twitter function.
+function twitterCall() {
+    var client = new Twitter({
+        consumer_key: 'RkRDXnkPtC1v92i8Uv8ASsGVJ',
+        consumer_secret: 'leL5MlhS3Duo0qOJYCo6Nl9J01DyZ6S3UudHbura2VfVXKOD7N',
+        access_token_key: '985341007897210880-bXNCjR4fVaFt7pDuStzK0menmEmN837',
+        access_token_secret: '4hJtZ3rVeRmwk1YVMwOrYxlQdm3yOyYiX1m5K1lEySCAz'
+    });
+
+    var params = { screen_name: 'affectivecode' };
+    client.get('statuses/user_timeline', params, function(error, tweets, response) {
+        if (!error) {
+            console.log(tweets);
+        }
+    });
+};
 
 // Defines Spotify function.
 // Retrieves song artist, name, preview, and album from Spotify API.
@@ -24,7 +40,6 @@ function spotifyCall() {
         if (err) {
             return console.log('Error occurred: ' + err);
         }
-
         var spotifyArtist = data.tracks.items[0].artists;
         var spotifyName = data.tracks.items[0].name;
         var spotifyPreview = data.tracks.items[0].preview_url;
@@ -73,13 +88,13 @@ function movieCall() {
     });
 
     // If statement for user input.
-    if (userInput === 'my-tweets') {
+    if (userCommand === 'my-tweets') {
         // Call Twitter function
-    } else if (userInput === 'spotify-this-song') {
+    } else if (userCommand === 'spotify-this-song') {
         // Call Spotify function
-    } else if (userInput === 'movie-this') {
+    } else if (userCommand === 'movie-this') {
         // Call Movie functionn
-    } else if (userInnput === 'do-what-it-says') {
+    } else if (userCommand === 'do-what-it-says') {
         // Run 'spotify-this-song' for "I Want it That Way"
     } else {
         console.log("Commannd not found!")
