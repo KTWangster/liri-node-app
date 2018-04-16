@@ -23,8 +23,12 @@ function twitterCall() {
     var params = { screen_name: 'affectivecode' };
     client.get('statuses/user_timeline', params, function(error, tweets, response) {
         if (!error) {
-            console.log(tweets);
-        }
+            // Outputs last 20 Tweets.
+            for (var i = 0; i < 20; i++) {
+                var tweetResult = "Tweets: " + tweets[i].text;
+                console.log(tweetResult);
+            };
+        };
     });
 };
 
@@ -76,27 +80,32 @@ function movieCall() {
             var omdbTitle = JSON.parse(body).Title;
             var omdbYear = JSON.parse(body).Year;
             var omdbImdb = JSON.parse(body).IMDBRating;
-            var omdbRottenTomatoes = JSON.parse(body).RottenTomatoes;
-            var omdbProduction = JSON.parse(body).Title;
-            var omdbLanguage = JSON.parse(body).Title;
-            var omdbPlot = JSON.parse(body).Title;
-            var omdbActors = JSON.parse(body).Title;
+            var omdbRottenTomatoes = JSON.parse(body).Ratings[1].Value;
+            var omdbProduction = JSON.parse(body).Country;
+            var omdbLanguage = JSON.parse(body).Language;
+            var omdbPlot = JSON.parse(body).Plot;
+            var omdbActors = JSON.parse(body).Actors;
             // Output OMDB result.
             var omdbResult = "Title: " + "Release Year: " + "IMDB Rating: " + "Rotten Tomatoes Ratin: " +
                 "Country of Production: " + "Language: " + "Plot: " + "Actors: "
-        };
+        } else {
+            search = "Mr. Nobody";
+        }
     });
 
     // If statement for user input.
     if (userCommand === 'my-tweets') {
         // Call Twitter function
+        twitterCall();
     } else if (userCommand === 'spotify-this-song') {
         // Call Spotify function
+        spotifyCall();
     } else if (userCommand === 'movie-this') {
-        // Call Movie functionn
+        // Call Movie function
+        movieCall();
     } else if (userCommand === 'do-what-it-says') {
         // Run 'spotify-this-song' for "I Want it That Way"
     } else {
-        console.log("Commannd not found!")
+        console.log("Command not found!")
     };
 };
