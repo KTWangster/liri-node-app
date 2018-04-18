@@ -1,4 +1,4 @@
-require("dotenv").config();
+//require("dotenv").config();
 
 var fs = require("fs");
 var path = "random.txt";
@@ -44,17 +44,19 @@ function spotifyCall() {
         if (err) {
             return console.log('Error occurred: ' + err);
         }
+        // Song artist
         var spotifyArtist = data.tracks.items[0].artists;
+        // Song title
         var spotifyName = data.tracks.items[0].name;
-        var spotifyPreview = data.tracks.items[0].preview_url;
-        var spotifAlbum = data.tracks.items[0].album.name;
+        // Song preview link
+        var spotifyPreview = data.tracks.items[0].external_urls.spotify;
+        // Song album
+        var spotifyAlbum = data.tracks.items[0].album.name;
         // Variable with all results.
         var spotifyResult = "Artist: " + spotifyArtist + "\nSong: " + spotifyName + "\nPreview: " +
             spotifyPreview + "\nAlbum: " + spotifyAlbum;
-
         // Output Spotify result.
         console.log(spotifyResult);
-
     });
 };
 
@@ -86,12 +88,26 @@ function movieCall() {
             var omdbPlot = JSON.parse(body).Plot;
             var omdbActors = JSON.parse(body).Actors;
             // Output OMDB result.
-            var omdbResult = "Title: " + "Release Year: " + "IMDB Rating: " + "Rotten Tomatoes Ratin: " +
-                "Country of Production: " + "Language: " + "Plot: " + "Actors: "
+            var omdbResult = "Title: " + omdbTitle + "\nRelease Year: " + omdbYear + "\nIMDB Rating: " + omdbIMDB +
+                "\nRotten Tomatoes Rating: " + omdbRottenTomatoes + "\nCountry of Production: " + omdbProduction +
+                "\nLanguage: " + omdbLanguage + "\nPlot: " + omdbPlot + "\nActors: " + omdbActors;
         } else {
             search = "Mr. Nobody";
-        }
+        };
     });
+
+    // Reads .txt file and outputs data accordingly
+    function doSomething() {
+        fs.readFile(path, 'utf8', function(err, data) {
+            if (err) throw err;
+        });
+        // Splits file data
+        var splitCommand = data.split(',');
+        //Assigns split data to temporary variables
+        var tempCommand = splitCommand[0];
+        var tempSearch = splitCommand[1];
+        spotifyCall();
+    };
 
     // If statement for user input.
     if (userCommand === 'my-tweets') {
@@ -105,6 +121,7 @@ function movieCall() {
         movieCall();
     } else if (userCommand === 'do-what-it-says') {
         // Run 'spotify-this-song' for "I Want it That Way"
+        doSomething();
     } else {
         console.log("Command not found!")
     };

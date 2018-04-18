@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/KTWangster/liri-node-app#readme",
   "dependencies": {
+    "fs": "0.0.1-security",
     "geocoder": "^0.2.3"
   }
 }
