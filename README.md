@@ -1,5 +1,5 @@
 # liri-node-app
-A backend application that calls API's from Spotify, IMDB, and Twitter.
+A backend language interpretation and recognition interface that uses NPM's from Spotify, OMDB, and Twitter APIs to return data following user commands.
 
 ## What Each Command Should Do:
 
