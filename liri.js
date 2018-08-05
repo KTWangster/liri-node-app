@@ -14,10 +14,10 @@ var search = "";
 // Defines Twitter function.
 function twitterCall() {
     var client = new Twitter({
-        consumer_key: 'RkRDXnkPtC1v92i8Uv8ASsGVJ',
-        consumer_secret: 'leL5MlhS3Duo0qOJYCo6Nl9J01DyZ6S3UudHbura2VfVXKOD7N',
-        access_token_key: '985341007897210880-bXNCjR4fVaFt7pDuStzK0menmEmN837',
-        access_token_secret: '4hJtZ3rVeRmwk1YVMwOrYxlQdm3yOyYiX1m5K1lEySCAz'
+        consumer_key: '<CONSUMER_KEY>',
+        consumer_secret: '<CONSUMER_SECRET>',
+        access_token_key: '<ACCESS_TOKEN_KEY>',
+        access_token_secret: '<ACCESS_TOKEN_SECRET>'
     });
 
     var params = { screen_name: 'affectivecode' };
